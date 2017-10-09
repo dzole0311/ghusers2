@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
+import { Form, FormGroup, Button } from 'react-bootstrap';
 
 class SearchBox extends Component {
   render() {
     return (
-      <form 
-        className='search-container'
+      <Form className='searchContainer'
         onSubmit={this.handleSubmit.bind(this)}>
-        <input
-          className='search-input'
-          ref={(ref) => this.search = ref}
-          placeholder='Search for a username...'
-          type='text'/>
+        <FormGroup>
+            <input
+              className='inputBar'
+              ref={(ref) => this.search = ref}
+              placeholder='Search for a username...'
+              type='text'/>
 
-          <br/>
-        
-        <input
-          className='search-submit'
-          type='submit'
-          placeholder='Submit' />
-      </form>
+            <input
+              className='button btn btn-success'
+              type='submit'
+              placeholder='Submit' />
+          </FormGroup>
+      </Form>
     );
   }
 

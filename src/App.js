@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+
 import Card from './components/card.js';
 import SearchBox from './components/search-box.js';
+
 import './index.css';
 
 class App extends Component {
@@ -13,18 +15,25 @@ class App extends Component {
       location: '',
       followers: '',
       following: '',
-      repos: ''
-    }
+      repos: '',
+      address: '',
+      }
   }
 
   render() {
     return (
       <div>
-        <SearchBox fetchUser={this.fetchUser.bind(this)} />
+        <SearchBox fetchUser={this.fetchUser.bind(this)}/>
         <Card data={this.state} />
       </div>
     );
   }
+
+  fetchUser(username) {
+    let url = `https://api.github.com/users/${username}`;
+
+    this.fetchApi(url);
+  };
 
   fetchApi(url) {
     fetch(url)
@@ -37,22 +46,16 @@ class App extends Component {
           location: data.location,
           followers: data.followers,
           following: data.following,
-          repos: data.public_repos
+          repos: data.public_repos,
         })
       });
   }
 
-  fetchUser(username) {
-    let url = `https://api.github.com/users/${username}`;
-
-    this.fetchApi(url);
-  }
-
   componentDidMount() {
-    let url = `https://api.github.com/users/${this.state.username}`
+    let url = `https://api.github.com/users/${this.state.username}`;
+
     this.fetchApi(url);
   }
-
 }
 
 export default App;
